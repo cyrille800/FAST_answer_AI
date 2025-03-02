@@ -79,8 +79,15 @@ def run_inference(segment_files, output_folder):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
     
-    # Construction de la commande d'inférence avec tous les segments à la fois
-    cmd = ["python", "inference.py", "--input_audio"] + segment_files + ["--output_folder", output_folder]
+    # Construction de la commande d'inférence avec tous les segments à la fois et les paramètres supplémentaires
+    cmd = ["python", "inference_modifier.py", "--input_audio"] + segment_files + [
+        "--output_folder", output_folder,
+        "--large_gpu",
+        "--only_vocals",
+        "--overlap_large", "0.7",
+        "--overlap_small", "0.6",
+        "--chunk_size", "2000000"
+    ]
     
     print(f"Exécution de la commande: {' '.join(cmd)}")
     try:
